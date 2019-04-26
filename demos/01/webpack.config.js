@@ -1,4 +1,6 @@
 const path = require('path')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+
 module.exports = {
   entry: path.resolve(__dirname, './main.js'),
   output: {
@@ -10,18 +12,26 @@ module.exports = {
       {
         // 匹配以.css结尾的文件。
         test: /\.css$/,
-        // 执行顺序由后到前
         use: [
-          'style-loader',
           {
-            loader: 'css-loader',
+            loader: MiniCssExtractPlugin.loader,
             options: {
-              // 开启css压缩 (这里打包报错？？？待查、、、注掉)
-              // minimize: true
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              publicPath: '../'
             }
-          }
+          },
+          "css-loader"
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].[contenthash:8].css",
+      chunkFilename: "[id].[contenthash:8].css"
+    })
+  ]
 }
