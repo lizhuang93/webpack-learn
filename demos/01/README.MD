@@ -1,3 +1,4 @@
+## 简单使用webpack(入门)
 ### 1. yarn start 
 ```
 $ yarn start ./demos/01/webpack.config.js
@@ -81,6 +82,7 @@ module.exports = {
   devServer: {
     open: true,
     port: 8000,
+    hot: true,
     proxy: {//配置跨域，访问的域名会被代理到本地的3000端口
       '/api': 'http://localhost:3000'
     }

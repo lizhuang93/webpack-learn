@@ -43,4 +43,5 @@ module.exports = {
       '/api': 'http://localhost:3000'
     }
   },
+  devtool: isDev ? 'eval-source-map' : false
 }
