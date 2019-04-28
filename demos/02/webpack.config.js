@@ -4,10 +4,8 @@ const isDev = process.env.NODE_ENV !== 'production'
 module.exports = {
   entry: path.resolve(__dirname, './main.js'),
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, './dist'),
-    library: 'umd',
-    libraryTarget: 'commonjs2'
+    filename: 'myBundle.js',
+    path: path.resolve(__dirname, './dist')
   },
   module: {
     rules: [
