@@ -1,4 +1,12 @@
 import show from './show'
 require('./main.css')
 
-show('Webpack')
+
+function abc() {
+  console.log('abc');
+}
+
+export const $ = {
+  show,
+  abc
+}
