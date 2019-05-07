@@ -26,3 +26,21 @@ $ yarn add webpack-cli -D
 // yarn start /demos/01/webpack.config.js
 $ yarn start /demos/demo-index/webpack.config.js
 ```
+### 4. 传递环境变量
+a. 使用yargs
+```
+$ yarn add yargs -D
+// 使用
+$ webpack --mode production
+// 获取
+const argv = require('yargs').argv
+const mode = argv.mode
+```
+b. 使用cross-env
+```
+$ yarn add cross-evn -D
+// 使用
+$ cross-env mode=production webpack
+// 获取
+console.log(process.env.mode)
+```

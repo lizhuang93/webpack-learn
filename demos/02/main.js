@@ -1,1 +1,4 @@
-require('../01/dist/bundle')
+var demo01 = require('@/01/dist/bundle')
+
+demo01.show('webpack')
+

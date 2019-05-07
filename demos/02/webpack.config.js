@@ -1,7 +1,10 @@
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const isDev = process.env.NODE_ENV !== 'production'
+const isDev = process.env.MODE !== 'production'
+const MODE = process.env.MODE || 'production'
+
 module.exports = {
+  mode: MODE,
   entry: path.resolve(__dirname, './main.js'),
   output: {
     filename: 'myBundle.js',
@@ -26,6 +29,11 @@ module.exports = {
         ]
       }
     ]
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '../')
+    }
   },
   plugins: [
     new MiniCssExtractPlugin({
