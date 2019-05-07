@@ -1,4 +1,4 @@
-var demo01 = require('@/01/dist/bundle')
+require('./main.css')
+// var demo01 = require('@/01/dist/bundle')
 
-demo01.show('webpack')
-
+// demo01.show('webpack')

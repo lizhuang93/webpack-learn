@@ -11,6 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist')
   },
   module: {
+    noParse: /main/,
     rules: [
       {
         // 匹配以.css结尾的文件。

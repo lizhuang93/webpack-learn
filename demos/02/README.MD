@@ -1,6 +1,8 @@
 ## 配置
 ### 1. entry [看官网](https://www.webpackjs.com/configuration/entry-context/)
-### 2. 用 webpack 构建一个可以被其他模块导入的js库。
+
+### 2. output 
+> 用 webpack 构建一个可以被其他模块导入的js库。
 1. 将demos/01 以 commonjs模式导出
 ```
 // demos/01/webpack.config.js
@@ -35,7 +37,16 @@ $ demos/02: npx webpack-dev-server
 ```
 就可以看到demo1的内容了。
 
-### 3. 设置别名
+### 3. module
+1. noParse 忽略大型的 library 可以提高构建性能
+```
+module: {
+  noParse: /jquery|lodash/
+}
+```
+
+### 4. resolve
+1. 设置别名
 ```
 resolve: {
     alias: {
@@ -46,4 +57,5 @@ resolve: {
 // 使用
 var demo01 = require('@/01/dist/bundle')
 ```
-### 4. 
+
+### 5. 
