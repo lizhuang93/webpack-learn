@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config ",
     "watch": "webpack --watch ",
-    "build": "cross-env mode=production webpack --config "
+    "build": "cross-env MODE=production webpack --config "
   },
   "author": "lizhuang",
   "license": "ISC",

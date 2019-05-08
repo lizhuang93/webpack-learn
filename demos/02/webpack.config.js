@@ -1,17 +1,19 @@
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 const isDev = process.env.MODE !== 'production'
-const MODE = process.env.MODE || 'production'
+const MODE = process.env.MODE || 'development'
 
 module.exports = {
   mode: MODE,
+  devtool: isDev ? 'eval-source-map' : false,
   entry: path.resolve(__dirname, './main.js'),
   output: {
     filename: 'myBundle.js',
     path: path.resolve(__dirname, './dist')
   },
   module: {
-    noParse: /main/,
+    // noParse: /main/,
     rules: [
       {
         // 匹配以.css结尾的文件。
@@ -42,15 +44,18 @@ module.exports = {
       // both options are optional
       filename: "[name].[contenthash:8].css",
       chunkFilename: "[id].[contenthash:8].css"
-    })
+    }),
+    new HtmlWebpackPlugin({ template: path.resolve(__dirname, './index.html')})
   ],
   devServer: {
+    // https: true,
     open: true,
+    host: '0.0.0.0',
     port: 8000,
+    disableHostCheck: true,
     hot: true,
     proxy: {//配置跨域，访问的域名会被代理到本地的3000端口
       '/api': 'http://localhost:3000'
     }
-  },
-  devtool: isDev ? 'eval-source-map' : false
+  }
 }

@@ -58,4 +58,26 @@ resolve: {
 var demo01 = require('@/01/dist/bundle')
 ```
 
-### 5. 
+### 5. DevServer
+$ yarn add webpack-dev-server -D
+```
+  devServer: {
+    // https: true,
+    open: true,
+    host: '0.0.0.0',
+    port: 8000,
+    disableHostCheck: true,
+    hot: true,
+    proxy: {//配置跨域，访问的域名会被代理到本地的3000端口
+      '/api': 'http://localhost:3000'
+    }
+  },
+```
+### 6. 其他配置
+```
+// eval-source-map: 生成用于开发环境的最佳品质的 source map
+devtool: isDev ? 'eval-source-map' : false
+
+// 防止将某些 import 的包(package)打包到 bundle 中
+externals: /^(jquery|\$)$/i
+```
