@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    [
+      // 禁用了 babel 自动对每个文件的 runtime 注入, 而是使用第三方依赖 babel-runtime
+      // yarn add babel-plugin-transform-runtime babel-runtime -D
+      "transform-runtime",
+      {
+        "polyfill": false
+      }
+    ]
+  ],
+  // presets 告诉 babel 使用了哪些新语法特性。
+  "presets": [
+    // env 包含了 ES2015、ES2016、ES2017
+    "env"
+  ]
+}
