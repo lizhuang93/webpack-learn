@@ -5,8 +5,9 @@
 ### 2. 优化输出质量 
   1. 减少首屏加载时间
   2. 提升流畅度（代码性能）。
-<hr>
+<br><br>
 
+# 1. 优化开发体验，提升开发效率
 ## 1.1 优化构建速度
 ### 1. 缩小文件搜素范围
 - loader: 尽可能使用 test、include、exclude 三个配置来命中文件。
@@ -30,3 +31,87 @@
       })
     ]
     ```
+### 3. 利用 CUP 多核， 使用 HappyPack 加快 loader 转换
+> webpack 构建流程中最耗时的就是 Loader 转换，js 单线程只能对文件一个一个的处理，HappyPack 原理就是将这部分任务，分解到多个进程，减少构建时间。
+```
+
+$ yarn add happypack -D
+
+const HappyPack = require('happypack)
+// 共享进程池， 以防止资源占用过多
+const happyThreadPool = HappyPack.ThreadPool({size: 5})
+modules: {
+  rules: [
+    test: /\.js$/,
+    use: ['happypack/loader?id=babel'],
+    exclude: path.resolve(__dirname, 'node_modules')
+  ],
+  rules: [
+    test: /\.css$/,
+    use: ['happypack/loader?id=css'],
+    exclude: path.resolve(__dirname, 'node_modules')
+  ]
+}
+plugins: [
+  new HappyPack({
+    id: 'babel',
+    loaders: ['babel-loader?cacheDirectory'],
+    threadPool: happyThreadPool
+  }),
+  new HappyPack({
+    id: 'css',
+    loaders: ['css-loader'],
+    threadPool: happyThreadPool
+  })
+]
+```
+### 4. 利用 CUP 多核， 使用 ParalleUglifyPlugin 加快 UglifyJS 的压缩。
+> 线上代码压缩时， UglifyJS 去一个一个的压缩， ParalleUglifyPlugin 会开启多个子进程，每个子进程还是通过 UglifyJS 去压缩的。
+
+## 1.2 优化使用体验
+### 1. 使用 webpack 自带的 watch, 手动刷新页面。
+```
+$ webpack --watch 
+
+或
+
+module.export = {
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules/
+  }
+}
+```
+### 3. 使用 webapck-dev-server, 自动刷新页面。
+### 4. 模块热替换
+
+# 2. 优化输出质量 
+
+## 2.1 减少首屏加载时间
+### 1. 区分环境
+注意： 请使用 ***process.env.NODE_ENV***， 社区约定的！！！
+### 2. 压缩代码
+- 压缩js：UglifyJSPlugin
+- 压缩ES6: UglifyESPlugin
+- 压缩css：cssnano, css-loader 已内置，使用： ```use:['css-loader?minimize'] ```。
+### 3. CDN 动静分离
+```
+output: {
+  publicPath: '//static.cdn.com/'
+}
+```
+### 4. 使用 Tree Shaking 剔除用不上的死代码
+### 5. 提取公共代码 CommonsChunkPlugin
+### 6. 分割代码以按需加载
+```
+// 使用
+const Home = () => import(/* webpackChunkName: 'support' */ './home');
+
+// webpack.config.js
+output: {
+  chunkFilename: '[name].[chunkhash:8].js'
+}
+```
+## 2.2 提升流畅度（代码性能）
+- prepack: 编译时提前将计算结果放入编译后的代码中。【还不成熟，不建议用于生产环境】
+- Scope Hoisting, 使用 ModuleConcatenationPlugin。【仅适用于由 ES6 模块】

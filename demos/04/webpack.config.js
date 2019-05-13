@@ -4,11 +4,11 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CleanWebpackPlugin =require("clean-webpack-plugin")
-const isDev = process.env.MODE !== 'production'
-const MODE = process.env.MODE || 'development'
+const isDev = process.env.NODE_ENV !== 'production'
+const NODE_ENV = process.env.NODE_ENV || 'development'
 
 module.exports = {
-  mode: MODE,
+  mode: NODE_ENV,
   devtool: isDev ? 'eval-source-map' : false,
   entry: path.resolve(__dirname, './src/main.js'),
   output: {
