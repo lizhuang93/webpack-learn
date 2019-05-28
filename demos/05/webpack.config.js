@@ -1,5 +1,4 @@
 const path = require('path')
-const webpack = require('webpack')
 // MiniCssExtractPlugin 抽离css文件，只有生产环境有效
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")

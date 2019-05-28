@@ -37,7 +37,7 @@
 
 $ yarn add happypack -D
 
-const HappyPack = require('happypack)
+const HappyPack = require('happypack')
 // 共享进程池， 以防止资源占用过多
 const happyThreadPool = HappyPack.ThreadPool({size: 5})
 modules: {

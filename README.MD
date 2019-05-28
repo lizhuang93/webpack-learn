@@ -25,6 +25,10 @@ $ yarn add webpack-cli -D
 ```
 // yarn start /demos/01/webpack.config.js
 $ yarn start /demos/demo-index/webpack.config.js
+
+或
+// 在当前目录下，npx 执行
+demos/01/$ npx webpack
 ```
 ### 4. 传递环境变量
 a. 使用yargs

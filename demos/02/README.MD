@@ -81,3 +81,5 @@ devtool: isDev ? 'eval-source-map' : false
 // 防止将某些 import 的包(package)打包到 bundle 中
 externals: /^(jquery|\$)$/i
 ```
+### 7. webpack4 optimization
+[https://webpack.docschina.org/configuration/optimization/](https://webpack.docschina.org/configuration/optimization/)
